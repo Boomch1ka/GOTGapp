@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34701.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gotgApp", "gotgApp\gotgApp.csproj", "{FACBD7F0-18DF-44F5-9D26-F70764BC206E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FACBD7F0-18DF-44F5-9D26-F70764BC206E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FACBD7F0-18DF-44F5-9D26-F70764BC206E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FACBD7F0-18DF-44F5-9D26-F70764BC206E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FACBD7F0-18DF-44F5-9D26-F70764BC206E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {70FED893-0AE1-4317-AE42-A77FDF3C269D}
+	EndGlobalSection
+EndGlobal
