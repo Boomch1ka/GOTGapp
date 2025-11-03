@@ -1,21 +1,24 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-public class IncidentReport
+namespace gotgApp.Models
 {
-    public int ID { get; set; }
+    public class IncidentReport
+    {
+        public int ID { get; set; }
 
-    [Required]
-    public string Location { get; set; }
+        [Required]
+        public string Location { get; set; } = null!;
 
-    [Required]
-    [StringLength(500)]
-    public string Description { get; set; }
+        [Required]
+        [StringLength(500)]
+        public string Description { get; set; } = null!;
 
-    [DataType(DataType.Date)]
-    public DateTime Date { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime Date { get; set; }
 
-    [Required]
-    public string ReporterName { get; set; }
+        [Required]
+        public string ReporterName { get; set; } = null!;
+    }
 }
 

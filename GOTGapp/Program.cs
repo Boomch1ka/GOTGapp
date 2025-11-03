@@ -1,4 +1,4 @@
-﻿using GOTGapp.Data; // Make sure this matches your namespace
+﻿using gotgApp.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,14 +15,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // 🔹 Add Identity services
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
-    .AddRoles<IdentityRole>() // 🔥 This enables role support
-    .AddEntityFrameworkStores<ApplicationDbContext>();
     options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequireDigit = true;
     options.Password.RequiredLength = 6;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = true;
 })
+.AddRoles<IdentityRole>() // 🔥 This enables role support
 .AddEntityFrameworkStores<ApplicationDbContext>();
 
 // 🔹 Add MVC and Razor Pages

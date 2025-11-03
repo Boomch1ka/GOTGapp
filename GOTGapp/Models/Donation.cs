@@ -1,18 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace GOTGapp.Models
+namespace gotgApp.Models
 {
     public class Donation
     {
         public int ID { get; set; }
 
         [Required]
-        public string DonorName { get; set; }
+        public string DonorName { get; set; } = null!;
 
         [Required]
-        public string ResourceType { get; set; } // e.g., Food, Clothing, Medical
+        public string ResourceType { get; set; } = null!; // e.g., Food, Clothing, Medical
 
         [Range(1, int.MaxValue, ErrorMessage = "Quantity must be at least 1")]
         public int Quantity { get; set; }
@@ -20,3 +19,4 @@ namespace GOTGapp.Models
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
     }
+}

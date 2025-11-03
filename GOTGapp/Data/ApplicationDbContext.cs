@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using gotgApp.Models;
 
-namespace GOTGapp.Data
+namespace gotgApp.Data
 {
     public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {

@@ -1,81 +1,88 @@
-﻿using GOTGapp.Data;
-using GOTGapp.Models;
+﻿using gotgApp.Data;
+using gotgApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
-public class VolunteersController : Controller
+namespace gotgApp.Controllers
 {
-    private readonly ApplicationDbContext _context;
-
-    public VolunteersController(ApplicationDbContext context)
+    public class VolunteersController : Controller
     {
-        _context = context;
-    }
+        private readonly ApplicationDbContext _context;
 
-    public async Task<IActionResult> Index()
-    {
-        return View(await _context.Volunteers.ToListAsync());
-    }
-
-    public IActionResult Create()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(Volunteer volunteer)
-    {
-        if (ModelState.IsValid)
+        public VolunteersController(ApplicationDbContext context)
         {
-            _context.Add(volunteer);
-            await _context.SaveChangesAsync();
+            _context = context;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Volunteers.ToListAsync());
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Volunteer volunteer)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(volunteer);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(volunteer);
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var volunteer = await _context.Volunteers.FindAsync(id);
+            if (volunteer == null) return NotFound();
+            return View(volunteer);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Volunteer volunteer)
+        {
+            if (id != volunteer.ID) return NotFound();
+            if (ModelState.IsValid)
+            {
+                _context.Update(volunteer);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(volunteer);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var volunteer = await _context.Volunteers.FindAsync(id);
+            if (volunteer == null) return NotFound();
+            return View(volunteer);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var volunteer = await _context.Volunteers.FindAsync(id);
+            if (volunteer != null)
+            {
+                _context.Volunteers.Remove(volunteer);
+                await _context.SaveChangesAsync();
+            }
             return RedirectToAction(nameof(Index));
         }
-        return View(volunteer);
-    }
 
-    public async Task<IActionResult> Edit(int id)
-    {
-        var volunteer = await _context.Volunteers.FindAsync(id);
-        if (volunteer == null) return NotFound();
-        return View(volunteer);
-    }
-
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, Volunteer volunteer)
-    {
-        if (id != volunteer.ID) return NotFound();
-        if (ModelState.IsValid)
+        public async Task<IActionResult> Details(int id)
         {
-            _context.Update(volunteer);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            var volunteer = await _context.Volunteers.FindAsync(id);
+            if (volunteer == null) return NotFound();
+            return View(volunteer);
         }
-        return View(volunteer);
-    }
-
-    public async Task<IActionResult> Delete(int id)
-    {
-        var volunteer = await _context.Volunteers.FindAsync(id);
-        if (volunteer == null) return NotFound();
-        return View(volunteer);
-    }
-
-    [HttpPost, ActionName("Delete")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteConfirmed(int id)
-    {
-        var volunteer = await _context.Volunteers.FindAsync(id);
-        _context.Volunteers.Remove(volunteer);
-        await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
-    }
-
-    public async Task<IActionResult> Details(int id)
-    {
-        var volunteer = await _context.Volunteers.FindAsync(id);
-        if (volunteer == null) return NotFound();
-        return View(volunteer);
     }
 }
